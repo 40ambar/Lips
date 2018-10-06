@@ -1,0 +1,143 @@
+﻿<html>
+<head>VS Test</head>
+<body>
+<textarea id="code" rows="10" style="width: 100%;">
+(print 
+    (+ 
+        (* 2 3) 
+        (sin (/ 3.14 2))
+    )
+)
+</textarea><br />
+<textarea id="output" rows="10" style="width: 100%;" readonly></textarea><br />
+<button onclick="run()" style="width: 100%;">Run!</button>
+<script>
+
+    var log = function (text) {
+        document.getElementById("output").value += text + "\n";
+    }
+
+    var library = {
+        "sin": Math.sin,
+        "print": log,
+        "alert": alert,
+        "+": (...args) => args.reduce((a, b) => a + b),
+        "-": (...args) => args.reduce((a, b) => a - b),
+        "/": (...args) => args.reduce((a, b) => a / b),
+        "*": (...args) => args.reduce((a, b) => a * b),
+    }
+
+    var asd = function (tokens) {
+    /*
+        sexp = [[]]
+        word = ''
+        in_str = False
+        for char in string:
+            if char == '(' and not in_str:
+                sexp.append([])
+            elif char == ')' and not in_str:
+                if word:
+                    sexp[-1].append(word)
+                    word = ''
+                temp = sexp.pop()
+                sexp[-1].append(temp)
+            elif char in (' ', '\n', '\t') and not in_str:
+                if word:
+                    sexp[-1].append(word)
+                    word = ''
+            elif char == '\"':
+                in_str = not in_str
+            else:
+                word += char
+        return sexp[0]
+    */
+
+    }
+
+    //lexer
+    var lexer = function (text) {
+        return text
+        .replace(/\(/g, " ( ")
+        .replace(/\)/g, " ) ")
+        .split(" ")
+        .filter(function (n) {
+            return n.trim() != "";
+        });
+    };
+
+    //parser
+    var parser = function (tokens) {
+
+        //token
+        var token = tokens.shift();
+
+        //array
+        if (token == "(") {
+            var expr = [];
+            while (tokens[0] != ")") {
+                expr.push(parser(tokens));
+            }
+            tokens.shift();
+            return expr;
+        }
+
+        //number
+        else if (!isNaN(token)) {
+            return parseFloat(token);
+        }
+
+        //func
+        else {
+            return token;
+        }
+
+    };
+
+    //compiler
+    var interpreter = function (ast) {
+
+        //number
+        if (typeof ast === "number") {
+            return ast;
+        }
+
+        //fonksiyon bul
+        var symbol = ast.shift();
+        var func = library[symbol];
+
+        //tanımsız fonksiyon
+        if (typeof func === "undefined") {
+            throw "'" + symbol + "' tanımsız fonksiyon";
+        }
+
+        //geçersiz fonksiyon
+        else if (typeof func !== "function") {
+            throw "'" + symbol + "' geçersiz fonksiyon";
+        }
+
+        //fonksiyon çağır
+        else {
+            return func.apply(null, ast.map(interpreter));
+        }
+
+    }
+
+    //çalıştır
+    var run = function () {
+        try {
+          interpreter(
+              parser(
+                  lexer(
+                      document.getElementById("code").value
+                  )
+              )
+          );
+        }
+        catch (e) {
+            log("Hata: " + e);
+        }
+    }
+
+</script>
+</body>
+</html>

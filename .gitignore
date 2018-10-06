@@ -72,3 +72,18 @@ typings/
 
 # Serverless directories
 .serverless
+/toJsString.htm
+/toJsonString.htm
+/toJsEval.htm
+/sdfs.htm
+/Paren6.htm
+/Paren5.htm
+/Paren4.htm
+/Paren3.htm
+/Paren2.htm
+/Paren1.htm
+/LittleLisp5.htm
+/LittleLisp4.htm
+/LittleLisp3.htm
+/LittleLisp2.htm
+/LittleLisp1.htm
