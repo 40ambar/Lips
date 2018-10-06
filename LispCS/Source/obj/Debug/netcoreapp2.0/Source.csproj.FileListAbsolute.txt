@@ -1,0 +1,11 @@
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\bin\Debug\netcoreapp2.0\Source.deps.json
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\bin\Debug\netcoreapp2.0\Source.runtimeconfig.json
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\bin\Debug\netcoreapp2.0\Source.runtimeconfig.dev.json
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\bin\Debug\netcoreapp2.0\Source.dll
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\bin\Debug\netcoreapp2.0\Source.pdb
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.csprojAssemblyReference.cache
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.csproj.CoreCompileInputs.cache
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.AssemblyInfoInputs.cache
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.AssemblyInfo.cs
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.dll
+C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.pdb
