@@ -1,0 +1,47 @@
+LITERAL
+-NUMBER (123.456E+789)
+-STRING (tirnakla baslar tirlanka biter escape karekterlerini arastir)
+-LISTE
+-BOOL
+-QUOTE (todo)
+-COMMENT
+-Identiy
+-Ref
+
+UNARY OPERATOR
+(++ AstVar)
+(-- AstVar)
+(! AstVar)
+
+BINARY OPERATOR
+(+ Ast Ast ...)
+(- Ast Ast ...)
+(* Ast Ast ...)
+(/ Ast Ast ...)
+(% Ast Ast)
+(^ Ast Ast)
+(< Ast Ast)
+(> Ast Ast)
+(<= Ast Ast)
+(>= Ast Ast)
+(== Ast Ast ...)
+(!= Ast Ast ...)
+(| Ast Ast ...)
+(|| Ast Ast ...)
+(& Ast Ast ...)
+(&& Ast Ast ...)
+
+//DEFINATIONS
+(var Identiy Ast)
+(set AstVar Ast)
+(func (Identiy ...) Ast )
+
+//FLOW CONTROL
+(if Ast Ast Ast)
+(for Identiy Ast Ast Ast Ast)
+(while Ast Ast)
+
+Reader (Karekter okur gözlemler satir sütun index numarasi verir ve hata üretir)
+Lexer (Number, String, Comment, WhiteSpace, Identiy, Parantezler, Operator, Eof tokenlarini döndürür)
+Parser (Program, Number, String, List, BinaryOperator, UnaryOperator, Ref, Var, Set, If, While, For, Func)
+
