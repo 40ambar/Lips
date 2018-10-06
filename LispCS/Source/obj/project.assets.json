@@ -664,30 +664,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mstsh\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/evox/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mstsh\\Desktop\\Lisp-parser\\LispCS\\Source\\Source.csproj",
+      "projectUniqueName": "/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/Source.csproj",
       "projectName": "Source",
-      "projectPath": "C:\\Users\\mstsh\\Desktop\\Lisp-parser\\LispCS\\Source\\Source.csproj",
-      "packagesPath": "C:\\Users\\mstsh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mstsh\\Desktop\\Lisp-parser\\LispCS\\Source\\obj\\",
+      "projectPath": "/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/Source.csproj",
+      "packagesPath": "/Users/evox/.nuget/packages/",
+      "outputPath": "/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mstsh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/evox/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

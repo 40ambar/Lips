@@ -1,11 +1,22 @@
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\bin\Debug\netcoreapp2.0\Source.deps.json
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\bin\Debug\netcoreapp2.0\Source.runtimeconfig.json
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\bin\Debug\netcoreapp2.0\Source.runtimeconfig.dev.json
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\bin\Debug\netcoreapp2.0\Source.dll
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\bin\Debug\netcoreapp2.0\Source.pdb
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.csprojAssemblyReference.cache
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.csproj.CoreCompileInputs.cache
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.AssemblyInfoInputs.cache
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.AssemblyInfo.cs
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.dll
-C:\Users\mstsh\Desktop\Lisp-parser\LispCS\Source\obj\Debug\netcoreapp2.0\Source.pdb
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/bin/Debug/netcoreapp2.0/Source.deps.json
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/bin/Debug/netcoreapp2.0/Source.runtimeconfig.json
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/bin/Debug/netcoreapp2.0/Source.runtimeconfig.dev.json
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/bin/Debug/netcoreapp2.0/Source.dll
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/bin/Debug/netcoreapp2.0/Source.pdb
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/obj/Debug/netcoreapp2.0/Source.csprojAssemblyReference.cache
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/obj/Debug/netcoreapp2.0/Source.csproj.CoreCompileInputs.cache
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/obj/Debug/netcoreapp2.0/Source.AssemblyInfoInputs.cache
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/obj/Debug/netcoreapp2.0/Source.AssemblyInfo.cs
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/obj/Debug/netcoreapp2.0/Source.dll
+C:/Users/mstsh/Desktop/Lisp-parser/LispCS/Source/obj/Debug/netcoreapp2.0/Source.pdb
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/bin/Debug/netcoreapp2.0/Source.deps.json
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/bin/Debug/netcoreapp2.0/Source.runtimeconfig.json
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/bin/Debug/netcoreapp2.0/Source.runtimeconfig.dev.json
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/bin/Debug/netcoreapp2.0/Source.dll
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/bin/Debug/netcoreapp2.0/Source.pdb
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/obj/Debug/netcoreapp2.0/Source.csprojAssemblyReference.cache
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/obj/Debug/netcoreapp2.0/Source.csproj.CoreCompileInputs.cache
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/obj/Debug/netcoreapp2.0/Source.AssemblyInfoInputs.cache
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/obj/Debug/netcoreapp2.0/Source.AssemblyInfo.cs
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/obj/Debug/netcoreapp2.0/Source.dll
+/Users/evox/Google Drive/yortuc/side projects/lips_40_ambar/LispCS/Source/obj/Debug/netcoreapp2.0/Source.pdb
