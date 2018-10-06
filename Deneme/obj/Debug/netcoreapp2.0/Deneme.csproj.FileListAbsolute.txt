@@ -1,0 +1,11 @@
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\bin\Debug\netcoreapp2.0\Deneme.deps.json
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\bin\Debug\netcoreapp2.0\Deneme.runtimeconfig.json
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\bin\Debug\netcoreapp2.0\Deneme.runtimeconfig.dev.json
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\bin\Debug\netcoreapp2.0\Deneme.dll
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\bin\Debug\netcoreapp2.0\Deneme.pdb
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\obj\Debug\netcoreapp2.0\Deneme.csprojAssemblyReference.cache
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\obj\Debug\netcoreapp2.0\Deneme.csproj.CoreCompileInputs.cache
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\obj\Debug\netcoreapp2.0\Deneme.AssemblyInfoInputs.cache
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\obj\Debug\netcoreapp2.0\Deneme.AssemblyInfo.cs
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\obj\Debug\netcoreapp2.0\Deneme.dll
+C:\Users\mstsh\Desktop\Lisp-parser\Deneme\obj\Debug\netcoreapp2.0\Deneme.pdb
