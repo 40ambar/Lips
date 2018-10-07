@@ -1,69 +1,9 @@
+using Source.Tokens;
 using System;
 using System.Diagnostics;
 using System.Linq;
 
 namespace Source{
-
-    public abstract class Token {
-    }
-
-    public class TokenEof : Token {
-        public TokenEof() {
-        }
-    }
-
-    public class TokenError : Token {
-        public string Message;
-        public int Row;
-        public int Col;
-        public TokenError(string msg, int row, int col) {
-            Message = msg;
-            Row = row;
-            Col = col;
-        }
-    }
-
-    public class TokenNumber: Token {
-        public double Value;
-        public TokenNumber(double value){
-            Value = value;
-        }
-    }
-
-    public class TokenString : Token {
-        public string Value;
-        public TokenString(string value) {
-            Value = value;
-        }
-    }
-
-    public class TokenSymbol: Token {
-        public string Value;
-        public TokenSymbol(string value) {
-            Value = value;
-        }
-    }
-
-    public class TokenIdent : Token {
-        public string Value;
-        public TokenIdent(string value) {
-            Value = value;
-        }
-    }
-
-    public class TokenKeyword: Token {
-        public string Value;
-        public TokenKeyword(string value) {
-            Value = value;
-        }
-    }
-
-    public class TokenComment: Token {
-        public string Value;
-        public TokenComment(string value) {
-            Value = value;
-        }
-    }
 
     public class Lips {
 
