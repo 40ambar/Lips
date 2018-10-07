@@ -66,7 +66,7 @@ namespace Test {
 
         [Theory]
         [InlineData(";*abc*;", "abc")]
-        [InlineData(";* abc *;", " abc ")]
+        [InlineData(";* ab*c *;", " ab*c ")]
         [InlineData(";* a\nb\nc *;", " a\nb\nc ")]
         public void MultilineCommentParsing(string expr, string value) {
             var result = lips.Eval(expr);
@@ -76,6 +76,7 @@ namespace Test {
 
         [Theory]
         [InlineData(";*abc")]        
+        [InlineData(";* abc *")]
         public void MultilineCommentParsingErrors(string expr) {
             var result = lips.Eval(expr);
             Assert.IsType<TokenError>(result);
