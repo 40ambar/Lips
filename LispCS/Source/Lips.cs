@@ -128,13 +128,13 @@ namespace Source{
                     while(!Eof()){
                         var buff = Read();
                         if(buff == '*' && Peek() == ';'){
-                            break;
+                            return new TokenMultilineComment(value);
                         }
                         else{
                             value += buff;
                         }
                     }
-                    return new TokenMultilineComment(value);
+                    return new TokenError("Open end of multiline comment.", Row, Col);
                 }
                 else{
                     while (!Eof() && Peek() != '\n') {

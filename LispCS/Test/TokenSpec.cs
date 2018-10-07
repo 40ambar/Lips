@@ -75,6 +75,13 @@ namespace Test {
         }
 
         [Theory]
+        [InlineData(";*abc")]        
+        public void MultilineCommentParsingErrors(string expr) {
+            var result = lips.Eval(expr);
+            Assert.IsType<TokenError>(result);
+        }
+
+        [Theory]
         [InlineData(@"++")]
         [InlineData(@"--")]
         [InlineData(@"!")]
