@@ -161,11 +161,47 @@ namespace Source{
             else if (Peek() == '"') {
                 Read();
                 var value = "";
-                while (Peek() != '"') {
-                    if (Eof()) {
-                        return new TokenError("Expected '\"'", Row, Col);
+                while (!Eof() && Peek() != '"') {
+                    if (Peek() == '\\') {
+                        Read();
+                        if (Peek() == 'b') {
+                            value += '\b';
+                        }
+                        else if (Peek() == 'f') {
+                            value += '\f';
+                        }
+                        else if (Peek() == 'n') {
+                            value += '\n';
+                        }
+                        else if (Peek() == 'r') {
+                            value += '\r';
+                        }
+                        else if (Peek() == 't') {
+                            value += '\t';
+                        }
+                        else if (Peek() == 'v') {
+                            value += '\v';
+                        }
+                        else if (Peek() == '\'') {
+                            value += '\'';
+                        }
+                        else if (Peek() == '\"') {
+                            value += '\"';
+                        }
+                        else if (Peek() == '\\') {
+                            value += '\\';
+                        }
+                        else {
+                            return new TokenError("Unrecognized escape sequence", Row, Col);
+                        }
                     }
-                    value += Read();
+                    else {
+                        value += Peek();
+                    }
+                    Read();
+                }
+                if (Peek() != '"') {
+                    return new TokenError("Expected '\"'", Row, Col);
                 }
                 Read();
                 return new TokenString(value);

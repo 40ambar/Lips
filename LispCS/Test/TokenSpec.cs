@@ -113,5 +113,21 @@ namespace Test {
             Assert.IsType<TokenEof>(lips.Eval(expr));
         }
 
+        [Theory]
+        [InlineData(@"test \'" , "test \'")]
+        [InlineData(@"test \""", "test \"")]
+        [InlineData(@"test \\" , "test \\")]
+        [InlineData(@"test \b" , "test \b")]
+        [InlineData(@"test \f" , "test \f")]
+        [InlineData(@"test \n" , "test \n")]
+        [InlineData(@"test \r" , "test \r")]
+        [InlineData(@"test \t" , "test \t")]
+        [InlineData(@"test \v" , "test \v")]
+        public void StringEscape(string expr, string value) {
+            var result = lips.Eval(@"""" + expr + @"""");
+            Assert.IsType<TokenString>(result);
+            Assert.Equal(value, ((TokenString)result).Value);
+        }
+
     }
 }
