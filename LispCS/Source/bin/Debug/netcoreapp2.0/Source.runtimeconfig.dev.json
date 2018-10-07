@@ -1,9 +1,9 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "/Users/evox/.dotnet/store/|arch|/|tfm|",
-      "/Users/evox/.nuget/packages",
-      "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+      "C:\\Users\\mstsh\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\mstsh\\.nuget\\packages",
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
     ]
   }
 }

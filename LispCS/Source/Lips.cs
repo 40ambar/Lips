@@ -1,20 +1,25 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 
-namespace Source
-{
-    public abstract class Token { }
+namespace Source{
+
+    public abstract class Token {
+    }
+
+    public class TokenEof : Token {
+        public TokenEof() {
+        }
+    }
 
     public class TokenError : Token {
         public string Message;
         public int Row;
         public int Col;
-
         public TokenError(string msg, int row, int col) {
             Message = msg;
             Row = row;
             Col = col;
-            // throw new Exception(msg);
         }
     }
 
@@ -25,14 +30,62 @@ namespace Source
         }
     }
 
+    public class TokenString : Token {
+        public string Value;
+        public TokenString(string value) {
+            Value = value;
+        }
+    }
+
+    public class TokenSymbol: Token {
+        public string Value;
+        public TokenSymbol(string value) {
+            Value = value;
+        }
+    }
+
+    public class TokenIdent : Token {
+        public string Value;
+        public TokenIdent(string value) {
+            Value = value;
+        }
+    }
+
+    public class TokenKeyword: Token {
+        public string Value;
+        public TokenKeyword(string value) {
+            Value = value;
+        }
+    }
+
+    public class TokenComment: Token {
+        public string Value;
+        public TokenComment(string value) {
+            Value = value;
+        }
+    }
+
     public class Lips {
+
+        private string[] reserved = new[] { "true", "false", "if", "for", "while", "func", "var", "set" };
         private string Input;
         private int Index;
         private int Row;
         private int Col;
-        
+
+        private bool Eof() {
+            return Index >= Input.Length;
+        }
+
+        private char Peek() {
+            if (Eof()) {
+                return default(char);
+            }
+            return Input[Index];
+        }
+
         private char Read(){
-            if(Index >= Input.Length){
+            if(Eof()) {
                 return default(char);
             }
             var chr = this.Input[Index++];
@@ -46,65 +99,122 @@ namespace Source
             return chr;
         }
 
-        public char Peak(){
-            if(Index >= Input.Length){
-                return default(char);
-            }
-            return Input[Index];
-        }
+        //TODO: character escape
+        //TODO: multiline comment
+        private Token Token(){
 
-        public Token GetToken(){
-            // (print concat("hede " (+ 1 2))) -----> hede 3
-            while(true){
-
-                // eat whitespace
-                if(char.IsWhiteSpace(Peak())){
+            // whitespace
+            if(char.IsWhiteSpace(Peek())){
+                Read();
+                while(char.IsWhiteSpace(Peek())) { 
                     Read();
-                    while(char.IsWhiteSpace(Peak())) { 
-                        Read();
-                    }
-                }
-                // number token 123.456E+789
-                if(char.IsDigit(Peak())){
-                    string val_stack = Read().ToString();
-                    while(char.IsDigit(Peak())) { 
-                        val_stack += Read();
-                    }
-                    if(Peak() == '.'){
-                        val_stack += Read();
-                        if(char.IsDigit(Peak())){
-                            val_stack += Read();
-                            while(char.IsDigit(Peak())) { 
-                                val_stack += Read();
-                            }
-                        }
-                        else{
-                            return new TokenError($"Expected digit but found {Peak()}. Kiss you.", Row, Col);
-                        }
-                        if(Peak() == 'e' || Peak() == 'E'){
-                            val_stack += Read();
-                            if(Peak() == '+' || Peak() == '-'){
-                                val_stack += Read();
-                            }
-                            if(char.IsDigit(Peak())){
-                                val_stack += Read();
-                                while(char.IsDigit(Peak())) { 
-                                    val_stack += Read();
-                                }
-                            }
-                            else{
-                                return new TokenError("Invalid exponential expression. Kiss you.", Row, Col);
-                            }
-                        }
-                    }
-                    return new TokenNumber(double.Parse(val_stack));
                 }
             }
+
+            //comment
+            if (Peek() == ';') {
+                Read();
+                var value = "";
+                while (!Eof() && Peek() != '\n') {
+                    value += Read();
+                }
+                return new TokenComment(value);
+            }
+
+            // number
+            else if (char.IsDigit(Peek())) {
+                var value = Read().ToString();
+                while (char.IsDigit(Peek())) {
+                    value += Read();
+                }
+                if (Peek() == '.') {
+                    value += Read();
+                    if (char.IsDigit(Peek())) {
+                        value += Read();
+                        while (char.IsDigit(Peek())) {
+                            value += Read();
+                        }
+                    }
+                    else {
+                        return new TokenError($"Expected digit but found '{Peek()}'.", Row, Col);
+                    }
+                    if (Peek() == 'e' || Peek() == 'E') {
+                        value += Read();
+                        if (Peek() == '+' || Peek() == '-') {
+                            value += Read();
+                        }
+                        if (char.IsDigit(Peek())) {
+                            value += Read();
+                            while (char.IsDigit(Peek())) {
+                                value += Read();
+                            }
+                        }
+                        else {
+                            return new TokenError("Invalid exponential expression.", Row, Col);
+                        }
+                    }
+                }
+                return new TokenNumber(double.Parse(value));
+            }
+              
+            //string
+            else if (Peek() == '"') {
+                Read();
+                var value = "";
+                while (Peek() != '"') {
+                    if (Eof()) {
+                        return new TokenError("Expected '\"'", Row, Col);
+                    }
+                    value += Read();
+                }
+                Read();
+                return new TokenString(value);
+            }
+
+            //symbol
+            else if ("<>!+-=|&*/%^()".Contains(Peek().ToString())) {
+                var value = Read().ToString();
+                if ("<>!".Contains(value)) {
+                    if (Peek() == '=') {
+                        value += Read();
+                    }
+                }
+                else if ("+-=|&".Contains(value)) {
+                    if (value == Peek().ToString()) {
+                        value += Read();
+                    }
+                }
+                return new TokenSymbol(value);
+            }
+
+            //identy
+            else if (Peek() == '_' || char.IsLetter(Peek())) {
+                var value = Read().ToString();
+                while (Peek() == '_' || char.IsLetterOrDigit(Peek())) {
+                    value += Read();
+                }
+                if (reserved.Contains(value)) {
+                    return new TokenKeyword(value);
+                }
+                else {
+                    return new TokenIdent(value);
+                }
+            }
+
+            //dosya bitti
+            else if (Eof()) {
+                return new TokenEof();
+            }
+
+            //sen kim köpek
+            return new TokenError("Unexpected token '\"'", Row, Col);
+
         }
 
-        public Token Eval(string str){
-            this.Input = str;
-            return GetToken();
+        public Token Eval(string input) {
+            Input = input;
+            return Token();
         }
+
     }
 }

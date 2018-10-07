@@ -5,25 +5,113 @@ using Source;
 namespace Test {
 
     public class TokenSpec {
-        // 123.456E+789
-        Lips lips = new Lips();
-        
+
+        private Lips lips = new Lips();
+
+        [Fact]
+        public void ReaderTest() {
+            var error = (TokenError)lips.Eval("123.a");
+            Assert.IsType<TokenError>(error);
+            Assert.Equal(4, error.Col);
+            Assert.Equal(0, error.Row);
+        }
+
         [Theory]
-        [InlineData("234", 234.0)]
-        [InlineData("234.456", 234.456)]
-        [InlineData("234.456E+2", 234.456E+2)]
-        [InlineData("234.456E-2", 234.456E-2)]
-        [InlineData("234.456E2", 234.456E2)]
-        [InlineData("234.456e+2", 234.456E+2)]
-        [InlineData("234.456e-2", 234.456E-2)]
-        [InlineData("234.456e2", 234.456E2)]
-        public void Should_parse_number(string expr, double value) {
-            Assert.Equal(((TokenNumber)lips.Eval(expr)).Value, value);
+        [InlineData("123")]
+        [InlineData("123.456")]
+        [InlineData("123.456E+7")]
+        [InlineData("123.456E-7")]
+        [InlineData("123.456E7")]
+        [InlineData("123.456e+7")]
+        [InlineData("123.456e-7")]
+        [InlineData("123.456e7")]
+        public void NumberParsing(string expr) {
+            var result = lips.Eval(expr);
+            Assert.IsType<TokenNumber>(result);
+            Assert.Equal(double.Parse(expr), ((TokenNumber)result).Value);
         }
 
         [Fact]
-        public void Should_raise_error_if_no_digit_after_dot() {
-            Assert.IsType<TokenError>(lips.Eval("234.a"));
-        }    
+        public void NumberErrors() {
+            Assert.IsType<TokenError>(lips.Eval("123.a"));
+        }
+
+        [Theory]
+        [InlineData(@"a")]
+        [InlineData(@"a b")]
+        [InlineData(@"(a")]
+        [InlineData(@")a")]
+        [InlineData(@"(a)")]
+        public void StringParsing(string expr) {
+            var result = lips.Eval(@"""" + expr + @"""");
+            Assert.IsType<TokenString>(result);
+            Assert.Equal(expr, ((TokenString)result).Value);
+        }
+
+        [Theory]
+        [InlineData(@"""a")]
+        public void StringErrors(string expr) {
+            Assert.IsType<TokenError>(lips.Eval(expr));
+        }
+
+        [Theory]
+        [InlineData(";abc", "abc")]
+        [InlineData(";a;b;c", "a;b;c")]
+        [InlineData(";a;b\nc", "a;b")]
+        public void CommentParsing(string expr, string value) {
+            var result = lips.Eval(expr);
+            Assert.IsType<TokenComment>(result);
+            Assert.Equal(value, ((TokenComment)result).Value);
+        }
+
+        [Theory]
+        [InlineData(@"++")]
+        [InlineData(@"--")]
+        [InlineData(@"!")]
+        [InlineData(@"+")]
+        [InlineData(@"-")]
+        [InlineData(@"*")]
+        [InlineData(@"/")]
+        [InlineData(@"%")]
+        [InlineData(@"^")]
+        [InlineData(@"<")]
+        [InlineData(@">")]
+        [InlineData(@"<=")]
+        [InlineData(@">=")]
+        [InlineData(@"==")]
+        [InlineData(@"!=")]
+        [InlineData(@"|")]
+        [InlineData(@"||")]
+        [InlineData(@"&")]
+        [InlineData(@"&&")]
+        [InlineData(@"(")]
+        [InlineData(@")")]
+        public void SymbolParsing(string expr) {
+            Assert.Equal(expr, ((TokenSymbol)lips.Eval(expr)).Value);
+        }
+
+        [Theory]
+        [InlineData(@"true")]
+        [InlineData(@"false")]
+        [InlineData(@"if")]
+        [InlineData(@"for")]
+        [InlineData(@"while")]
+        [InlineData(@"func")]
+        [InlineData(@"var")]
+        [InlineData(@"set")]
+        public void KeywordParsing(string expr) {
+            var result = lips.Eval(expr);
+            Assert.IsType<TokenKeyword>(result);
+            Assert.Equal(expr, ((TokenKeyword)result).Value);
+        }
+
+        [Theory]
+        [InlineData("\nif\n")]
+        [InlineData("\n123\n")]
+        public void Eof(string expr) {
+            lips.Eval(expr);
+            Assert.IsType<TokenEof>(lips.Eval(expr));
+        }
+
     }
 }
