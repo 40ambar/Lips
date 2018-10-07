@@ -2,14 +2,14 @@
 
     public class AstVariable : Ast {
 
-        public readonly string name;
+        public readonly string Name;
 
         public AstVariable(string name) {
-            this.name = name;
+            Name = name;
         }
 
         public override object Eval(Context context) {
-            return context.Get(name);
+            return context.Get(Name);
         }
 
     }

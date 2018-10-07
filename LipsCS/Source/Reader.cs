@@ -2,7 +2,7 @@
 
     public class Reader {
 
-        public readonly string Source;
+        public string Source { get; private set; }
         public int Index { get; private set; }
         public int Row { get; private set; }
         public int Col { get; private set; }

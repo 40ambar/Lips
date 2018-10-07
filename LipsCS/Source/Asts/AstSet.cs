@@ -2,17 +2,18 @@
 
     public class AstSet : Ast {
 
-        private AstVariable variable;
-        private Ast value;
+        private AstVariable Variable;
+        private Ast Value;
 
         public AstSet(AstVariable variable, Ast value) {
-            this.value = value;
+            Variable = variable;
+            Value = value;
         }
 
         public override object Eval(Context context) {
             return context.Set(
-                variable.name,
-                variable.Eval(context)
+                Variable.name,
+                Value.Eval(context)
             );
         }
 

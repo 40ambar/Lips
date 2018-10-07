@@ -4,26 +4,26 @@ namespace Source.Asts {
 
     public class AstFunction : Ast {
 
-        public string[] variables;
-        public Ast body;
+        private string[] Variables;
+        private Ast Body;
 
         public AstFunction(string[] variables, Ast body) {
-            this.variables = variables;
-            this.body = body;
+            Variables = variables;
+            Body = body;
         }
 
         public override object Eval(Context context) {
             return new Func<object[], object>((arguments) => {
 
-                if (variables.Length != arguments.Length) {
+                if (Variables.Length != arguments.Length) {
                     throw new Exception("Invalid parameter");
                 }
 
                 context = context.Extend();
                 for (int i = 0; i < arguments.Length; i++) {
-                    context.Define(variables[i], arguments[i]);
+                    context.Define(Variables[i], arguments[i]);
                 }
-                return body.Eval(context);
+                return Body.Eval(context);
 
             });
         }

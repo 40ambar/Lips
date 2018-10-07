@@ -2,14 +2,14 @@
 
     public class AstLiteral : Ast {
 
-        private object value;
+        private object Value;
 
         public AstLiteral(object value) {
-            this.value = value;
+            Value = value;
         }
 
         public override object Eval(Context context) {
-            return value;
+            return Value;
         }
 
     }

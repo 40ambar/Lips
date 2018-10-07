@@ -2,15 +2,15 @@
 
     public class AstInc : Ast {
 
-        public AstVariable value;
+        private AstVariable Value;
 
         public AstInc(AstVariable value) {
-            this.value = value;
+            Value = value;
         }
 
         public override object Eval(Context context) {
-            var ret = (double)value.Eval(context);
-            context.Set(value.name, ret + 1);
+            var ret = (double)Value.Eval(context);
+            context.Set(Value.name, ret + 1);
             return ret;
         }
 
