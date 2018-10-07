@@ -16,9 +16,9 @@ namespace Source {
 
             // whitespace
             if (char.IsWhiteSpace(Reader.Peek())) {
-                Read();
+                Reader.Read();
                 while (char.IsWhiteSpace(Reader.Peek())) {
-                    Read();
+                    Reader.Read();
                 }
             }
 
@@ -27,37 +27,37 @@ namespace Source {
                 Reader.Read();
                 var value = "";
                 while (!Reader.Eof() && Reader.Peek() != '\n') {
-                    value += Read();
+                    value += Reader.Read();
                 }
                 return new TokenComment(value);
             }
 
             // number
             else if (char.IsDigit(Reader.Peek())) {
-                var value = Read().ToString();
+                var value = Reader.Read().ToString();
                 while (char.IsDigit(Reader.Peek())) {
-                    value += Read();
+                    value += Reader.Read();
                 }
                 if (Reader.Peek() == '.') {
-                    value += Read();
+                    value += Reader.Read();
                     if (char.IsDigit(Reader.Peek())) {
-                        value += Read();
+                        value += Reader.Read();
                         while (char.IsDigit(Reader.Peek())) {
-                            value += Read();
+                            value += Reader.Read();
                         }
                     }
                     else {
                         return new TokenError($"Expected digit but found '{Reader.Peek()}'.", Reader.Row, Reader.Col);
                     }
                     if (Reader.Peek() == 'e' || Reader.Peek() == 'E') {
-                        value += Read();
+                        value += Reader.Read();
                         if (Reader.Peek() == '+' || Reader.Peek() == '-') {
-                            value += Read();
+                            value += Reader.Read();
                         }
                         if (char.IsDigit(Reader.Peek())) {
-                            value += Read();
+                            value += Reader.Read();
                             while (char.IsDigit(Reader.Peek())) {
-                                value += Read();
+                                value += Reader.Read();
                             }
                         }
                         else {
@@ -70,7 +70,7 @@ namespace Source {
 
             //string
             else if (Reader.Peek() == '"') {
-                Read();
+                Reader.Read();
                 var value = "";
                 while (!Reader.Eof() && Reader.Peek() != '"') {
                     if (Reader.Peek() == '\\') {
@@ -109,26 +109,26 @@ namespace Source {
                     else {
                         value += Reader.Peek();
                     }
-                    Read();
+                    Reader.Read();
                 }
                 if (Reader.Peek() != '"') {
                     return new TokenError("Expected '\"'", Reader.Row, Reader.Col);
                 }
-                Read();
+                Reader.Read();
                 return new TokenString(value);
             }
 
             //symbol
             else if ("<>!+-=|&*/%^()".Contains(Reader.Peek().ToString())) {
-                var value = Read().ToString();
+                var value = Reader.Read().ToString();
                 if ("<>!".Contains(value)) {
                     if (Reader.Peek() == '=') {
-                        value += Read();
+                        value += Reader.Read();
                     }
                 }
                 else if ("+-=|&".Contains(value)) {
                     if (value == Reader.Peek().ToString()) {
-                        value += Read();
+                        value += Reader.Read();
                     }
                 }
                 return new TokenSymbol(value);
@@ -136,9 +136,9 @@ namespace Source {
 
             //identy
             else if (Reader.Peek() == '_' || char.IsLetter(Reader.Peek())) {
-                var value = Read().ToString();
+                var value = Reader.Read().ToString();
                 while (Reader.Peek() == '_' || char.IsLetterOrDigit(Reader.Peek())) {
-                    value += Read();
+                    value += Reader.Read();
                 }
                 if (Reserved.Contains(value)) {
                     return new TokenKeyword(value);

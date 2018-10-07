@@ -16,25 +16,24 @@
         }
 
         public char Peek() {
-            if (Eof()) {
-                return default(char);
-            }
-            return Source[Index];
+            return Eof() ? default(char) : Source[Index];
         }
 
         public char Read() {
             if (Eof()) {
                 return default(char);
             }
-            var chr = Source[Index++];
-            if (chr == '\n') {
-                Row++;
-                Col = 0;
-            }
             else {
-                Col++;
+                var chr = Source[Index++];
+                if (chr == '\n') {
+                    Row++;
+                    Col = 0;
+                }
+                else {
+                    Col++;
+                }
+                return chr;
             }
-            return chr;
         }
 
     }
