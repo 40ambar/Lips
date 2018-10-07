@@ -65,6 +65,16 @@ namespace Test {
         }
 
         [Theory]
+        [InlineData(";*abc*;", "abc")]
+        [InlineData(";* abc *;", " abc ")]
+        [InlineData(";* a\nb\nc *;", " a\nb\nc ")]
+        public void MultilineCommentParsing(string expr, string value) {
+            var result = lips.Eval(expr);
+            Assert.IsType<TokenMultilineComment>(result);
+            Assert.Equal(value, ((TokenMultilineComment)result).Value);
+        }
+
+        [Theory]
         [InlineData(@"++")]
         [InlineData(@"--")]
         [InlineData(@"!")]
