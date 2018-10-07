@@ -65,6 +65,13 @@ namespace Source{
         }
     }
 
+    public class TokenMultilineComment: Token {
+        public string Value;
+        public TokenMultilineComment(string value){
+            Value = value;
+        }
+    }
+
     public class Lips {
 
         private string[] reserved = new[] { "true", "false", "if", "for", "while", "func", "var", "set" };
@@ -114,11 +121,27 @@ namespace Source{
             //comment
             if (Peek() == ';') {
                 Read();
+                
                 var value = "";
-                while (!Eof() && Peek() != '\n') {
-                    value += Read();
+                if(Peek() == '*'){
+                    Read();
+                    while(!Eof()){
+                        var buff = Read();
+                        if(buff == '*' && Peek() == ';'){
+                            return new TokenMultilineComment(value);
+                        }
+                        else{
+                            value += buff;
+                        }
+                    }
+                    return new TokenError("Open end of multiline comment.", Row, Col);
                 }
-                return new TokenComment(value);
+                else{
+                    while (!Eof() && Peek() != '\n') {
+                        value += Read();
+                    }
+                    return new TokenComment(value);
+                }
             }
 
             // number
@@ -242,7 +265,7 @@ namespace Source{
                 return new TokenEof();
             }
 
-            //sen kim köpek
+            //sen kim kopek
             return new TokenError("Unexpected token '\"'", Row, Col);
 
         }
