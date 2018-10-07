@@ -6,6 +6,14 @@ namespace Test {
 
     public class LexerSpec {
 
+        [Fact]
+        public void UnexpectedToken() {
+            var lexer = new Lexer("if $");
+            lexer.Read();
+            var result = Assert.IsType<TokenError>(lexer.Read());
+            Assert.Equal("Unexpected token '$'", result.Message);
+        }
+
         [Theory]
         [InlineData("123")]
         [InlineData("123.456")]
@@ -57,6 +65,26 @@ namespace Test {
             var result = lexer.Read();
             Assert.IsType<TokenComment>(result);
             Assert.Equal(value, ((TokenComment)result).Value);
+        }
+
+        [Theory]
+        [InlineData(";*abc*;", "abc")]
+        [InlineData(";* ab*c *;", " ab*c ")]
+        [InlineData(";* a\nb\nc *;", " a\nb\nc ")]
+        public void MultilineCommentParsing(string expr, string value) {
+            var lexer = new Lexer(expr);
+            var result = lexer.Read();
+            Assert.IsType<TokenMultilineComment>(result);
+            Assert.Equal(value, ((TokenMultilineComment)result).Value);
+        }
+
+        [Theory]
+        [InlineData(";*abc")]        
+        [InlineData(";* abc *")]
+        public void MultilineCommentParsingErrors(string expr) {
+            var lexer = new Lexer(expr);
+            var result = lexer.Read();
+            Assert.IsType<TokenError>(result);
         }
 
         [Theory]

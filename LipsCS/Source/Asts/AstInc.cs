@@ -10,7 +10,7 @@
 
         public override object Eval(Context context) {
             var ret = (double)Value.Eval(context);
-            context.Set(Value.name, ret + 1);
+            context.Set(Value.Name, ret + 1);
             return ret;
         }
 

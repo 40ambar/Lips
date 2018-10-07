@@ -26,10 +26,25 @@ namespace Source {
             if (Reader.Peek() == ';') {
                 Reader.Read();
                 var value = "";
-                while (!Reader.Eof() && Reader.Peek() != '\n') {
-                    value += Reader.Read();
+                if(Reader.Peek() == '*'){
+                    Reader.Read();
+                    while(!Reader.Eof()){
+                        var buff = Reader.Read();
+                        if(buff == '*' && Reader.Peek() == ';'){
+                            return new TokenMultilineComment(value);
+                        }
+                        else{
+                            value += buff;
+                        }
+                    }
+                    return new TokenError("Open end of multiline comment.", Reader.Row, Reader.Col);
                 }
-                return new TokenComment(value);
+                else{
+                    while (!Reader.Eof() && Reader.Peek() != '\n') {
+                        value += Reader.Read();
+                    }
+                    return new TokenComment(value);
+                }
             }
 
             // number
@@ -154,7 +169,7 @@ namespace Source {
             }
 
             //sen kim köpek
-            return new TokenError("Unexpected token '\"'", Reader.Row, Reader.Col);
+            return new TokenError($"Unexpected token '{Reader.Peek()}'", Reader.Row, Reader.Col);
 
         }
 

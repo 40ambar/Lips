@@ -12,7 +12,7 @@
 
         public override object Eval(Context context) {
             return context.Set(
-                Variable.name,
+                Variable.Name,
                 Value.Eval(context)
             );
         }
