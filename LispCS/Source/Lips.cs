@@ -229,7 +229,7 @@ namespace Source{
                 return new TokenEof();
             }
 
-            //sen kim köpek
+            //sen kim kopek
             return new TokenError("Unexpected token '\"'", Row, Col);
 
         }
