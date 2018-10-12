@@ -34,13 +34,16 @@ namespace Test {
             );
         }
 
-        // [Fact]
-
-        // public void ExpressionTest() {
-        //     Assert.Equal(
-        //         Assert.IsType<Boolean>(Eval(new Boolean(true))).Value,
-        //         true
-        //     );
-        // }
+        [Fact]
+        public void IfTest() {
+            Assert.Equal(
+                Eval(new If(new Literal(true), new Literal("dogru"), new Literal("yanlis"))),
+                "dogru"
+            );
+            Assert.Equal(
+                Eval(new If(new Literal(false), new Literal("dogru"), new Literal("yanlis"))),
+                "yanlis"
+            );
+        }
     }
 }
