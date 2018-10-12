@@ -6,4 +6,4 @@
 > npm i
 > npm test
 ```
-![Logo](https://github.com/40ambar/Lips/blob/DivideProject/Logo.png)
+![Logo](Logo.png)
