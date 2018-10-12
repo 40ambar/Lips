@@ -117,6 +117,12 @@ namespace Test {
         [Theory]
         [InlineData(@"true")]
         [InlineData(@"false")]
+        public void BoolParsing(string expr) {
+            var lexer = new Lexer(expr);
+            Assert.IsType<TokenBool>(lexer.Read());
+        }
+
+        [Theory]
         [InlineData(@"if")]
         [InlineData(@"for")]
         [InlineData(@"while")]

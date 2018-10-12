@@ -1,6 +1,4 @@
-﻿using Source.Asts;
-
-namespace Source {
+﻿namespace Source {
 
     public class Parser {
 
@@ -10,9 +8,9 @@ namespace Source {
             Lexer = new Lexer(source);
         }
 
-        public Ast Read() {
-            return null;
-        }
+        //public Ast Read() {
+        //    return null;
+        //}
 
     }
 

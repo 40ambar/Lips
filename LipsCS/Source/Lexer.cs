@@ -3,16 +3,33 @@ using System.Linq;
 
 namespace Source {
 
+    //TODO: shift operators
+
     public class Lexer {
 
         private Reader Reader;
-        private string[] Reserved = new[] { "true", "false", "if", "for", "while", "func", "var", "set" };
+        private Token Current;
 
         public Lexer(string source) {
             Reader = new Reader(source);
+            Current = Next();
+        }
+
+        public bool Eof() {
+            return Reader.Eof();
+        }
+
+        public Token Peek() {
+            return Current;
         }
 
         public Token Read() {
+            var ret = Current;
+            Current = Next();
+            return ret;
+        }
+
+        private Token Next() {
 
             // whitespace
             if (char.IsWhiteSpace(Reader.Peek())) {
@@ -155,12 +172,23 @@ namespace Source {
                 while (Reader.Peek() == '_' || char.IsLetterOrDigit(Reader.Peek())) {
                     value += Reader.Read();
                 }
-                if (Reserved.Contains(value)) {
+
+                if (value == "true") {
+                    return new TokenBool(true);
+                }
+
+                else if (value == "false") {
+                    return new TokenBool(false);
+                }
+
+                else if (new[] { "if", "for", "while", "func", "var", "set" }.Contains(value)) {
                     return new TokenKeyword(value);
                 }
+
                 else {
                     return new TokenIdent(value);
                 }
+
             }
 
             //dosya bitti
