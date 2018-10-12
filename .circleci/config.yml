@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: cd LipsCS/Source
-      - run: dotnet restore
+      - run: dotnet restore Source.csproj
       - run: dotnet build
       - run: cd ../Test
       - run: dotnet test
