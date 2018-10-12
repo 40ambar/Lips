@@ -1,16 +1,12 @@
-dependencies:
-  pre:
-    - curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-    - sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-    - sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
-    - sudo apt-get update
-    - sudo apt-get install dotnet-sdk-2.0.2
-  override:
-    - dotnet restore
-test:
-  pre:
-    - dotnet --version
-    - dotnet build ./LipsCS/LispCS.sln
-  override:
-    - cd LispCS/Test/
-    - dotnet test
+version: 2
+jobs:
+  build:
+    docker:
+      - image: microsoft/dotnet:2.1.300-preview2-sdk-alpine
+    steps:
+      - checkout
+      - run: cd LipsCS/Source
+      - run: dotnet restore
+      - run: dotnet build
+      - run: cd ../Test
+      - run: dotnet test
