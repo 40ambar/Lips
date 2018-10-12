@@ -6,7 +6,7 @@ namespace Source{
     public class Context {
 
         private Context parent = null;
-        private Dictionary<string, Value> variables = new Dictionary<string, Value>();
+        private Dictionary<string, object> variables = new Dictionary<string, object>();
 
         public Context Extend() {
             return new Context() {
@@ -22,7 +22,7 @@ namespace Source{
             return context;
         }
 
-        public Value Define(string name, Value value) {
+        public object Define(string name, object value) {
             var context = Lookup(name);
             if (context != null) {
                 throw new Exception($"Variable already defined '{name}'.");
@@ -30,7 +30,7 @@ namespace Source{
             return variables[name] = value;
         }
 
-        public Value Get(string name) {
+        public object Get(string name) {
             var context = Lookup(name);
             if (context == null) {
                 throw new Exception($"Undefined variable '{name}'.");
@@ -38,7 +38,7 @@ namespace Source{
             return context.variables[name];
         }
 
-        public Value Set(string name, Value value) {
+        public object Set(string name, object value) {
             var context = Lookup(name);
             if (context == null) {
                 throw new Exception($"Undefined variable '{name}'.");

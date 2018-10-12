@@ -50,15 +50,23 @@ namespace Test {
         public void LambdaCallTest() {
             Assert.Equal(Eval(
                 new Call(
-                    new Lambda(new[]{ "x", "y" }, new Literal("guzel")),
-                    new Ast[]{ new Literal("x degeri") , new Literal("y degeri")}
+                    new Lambda(
+                        new[]{ "x", "y" }, 
+                        new Literal("guzel")
+                    ),
+                    new Literal("x degeri"), new Literal("y degeri")
                 )
             ), "guzel");
 
             Assert.Equal(Eval(
                 new Call(
-                    new Lambda(new[]{ "x", "y" }, new Operator("+", new Literal(1.0), new Literal(2.0))),
-                    new Ast[]{ new Literal(1.0) , new Literal(2.0) }
+                    new Lambda(
+                        new[]{ "x", "y" }, 
+                        new Operator("+", 
+                            new Variable("x") , new Variable("y")
+                        )
+                    ),
+                    new Literal(1.0), new Literal(2.0)
                 )
             ), 3.0);
         }
