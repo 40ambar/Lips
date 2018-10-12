@@ -4,7 +4,7 @@ using System;
 
 namespace Test {
 
-    public class ParserSpect {
+    public class IntepreterSpec {
 
     }
 
