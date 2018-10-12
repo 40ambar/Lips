@@ -6,4 +6,4 @@
 > npm i
 > npm test
 ```
-![Logo](Logo.png )
+![Logo](Logo.png)
