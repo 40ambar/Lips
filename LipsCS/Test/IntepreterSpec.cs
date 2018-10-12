@@ -70,5 +70,12 @@ namespace Test {
                 )
             ), 3.0);
         }
+
+        [Fact]
+        public void VariableDefTest(){
+            Assert.Equal(Eval(new Def("x", new Literal(12.0))), 12.0);
+        }
+
+        
     }
 }

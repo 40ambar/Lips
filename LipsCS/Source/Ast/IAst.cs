@@ -58,6 +58,35 @@ public class Variable : Ast {
         return context.Get(Name);
     }
 }
+public class Def : Ast {
+    public readonly string Name;
+    public readonly Ast Value;
+
+    public Def(string name, Ast value){
+        Name = name;
+        Value = value;
+    }
+    public override object Eval(Context context){
+        var ret = Value.Eval(context);
+        context.Define(Name, ret);
+        return ret;
+    }
+}
+
+public class Set : Ast {
+    public readonly string Name;
+    public readonly Ast Value;
+
+    public Set(string name, Ast value){
+        Name = name;
+        Value = value;
+    }
+    public override object Eval(Context context){
+        var ret = Value.Eval(context);
+        context.Set(Name, ret);
+        return ret;
+    }
+}
 
 public class If : Ast {
     public readonly Ast Condition;
