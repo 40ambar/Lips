@@ -15,13 +15,13 @@ public class Operator : Ast {
     public override object Eval(Context context) {
         switch (Op) {
             case "++": {
-                    var variable = (Variable)Left;
+                    var variable = (Get)Left;
                     var value = (double)variable.Eval(context);
                     context.Set(variable.Name, value + 1);
                     return value;
                 }
             case "--": {
-                    var variable = (Variable)Left;
+                    var variable = (Get)Left;
                     var value = (double)variable.Eval(context);
                     context.Set(variable.Name, value + 1);
                     return value;

@@ -63,7 +63,7 @@ namespace Test {
                             new Literal(0.0),
                             new Literal(10.0),
                             new Literal(2.0),
-                            new Variable("i")
+                            new Get("i")
                         )
                     )
                 ),
@@ -85,11 +85,11 @@ namespace Test {
                             new Def("i", new Literal(0.0)),
                             new While(
                                 new Operator("<",
-                                    new Variable("i"),
+                                    new Get("i"),
                                     new Literal(3.0)
                                 ),
                                 new Operator("++",
-                                    new Variable("i")
+                                    new Get("i")
                                 )
                             )
                         )
@@ -127,8 +127,8 @@ namespace Test {
                         new Lambda(
                             new[]{ "x", "y" }, 
                             new Operator("+", 
-                                new Variable("x") , 
-                                new Variable("y")
+                                new Get("x") , 
+                                new Get("y")
                             )
                         ),
                         new Literal(1.0), 
@@ -147,8 +147,8 @@ namespace Test {
                             new Def("x", new Literal(1.0)),
                             new Set("x", new Literal(2.0)),
                             new Def("y", new Literal(3.0)),
-                            new Variable("x"),
-                            new Variable("y")
+                            new Get("x"),
+                            new Get("y")
                         )
                     )
                 ),

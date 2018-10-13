@@ -1,10 +1,10 @@
 ﻿using Source;
 
-public class Variable : Ast {
+public class Get : Ast {
 
     public readonly string Name;
 
-    public Variable(string name) {
+    public Get(string name) {
         Name = name;
     }
 
