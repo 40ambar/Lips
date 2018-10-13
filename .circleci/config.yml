@@ -5,8 +5,4 @@ jobs:
       - image: microsoft/dotnet:2.1.300-preview2-sdk-alpine
     steps:
       - checkout
-      - run: cd LipsCS/Source
-      - run: dotnet restore Source.csproj
-      - run: dotnet build
-      - run: cd ../Test
-      - run: dotnet test
+      - run: dotnet test LipsCS/Test/Test.csproj
