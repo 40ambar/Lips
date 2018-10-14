@@ -1,13 +1,64 @@
 ﻿using Xunit;
 using Source;
 using System;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Test {
 
     public class IntepreterSpec {
 
+        delegate string Format(string value, params string[] values);
+
         private object Eval(Ast ast) {
-            return ast.Eval(new Context());
+            var context = new Context();
+
+            context.Define("sin", 
+                new Func<double, double>(Math.Sin)
+            );
+
+            context.Define("format",
+                new Func<string, object[], string>((s, values) => {
+                    //var parameters = new string[values.Length];
+                    //for (int i = 0; i < values.Length; i++) {
+                    //    parameters[i] = values.ToString();
+                    //}
+                    return string.Format(s, values.Select(i => i.ToString()).ToArray());
+                })
+            );
+
+            context.Define("log",
+                new Action<string>(value => Debug.WriteLine(value))
+            );
+
+            return ast.Eval(context); 
+        }
+
+        [Fact]
+        public void ExternalFuncTest() {
+            Assert.Equal(
+                Math.Sin(Math.PI / 2.0),
+                Eval(
+                    new Call(
+                        new Get("sin"),
+                        new Literal(Math.PI / 2.0)
+                    )
+                )
+            );
+            Assert.Equal(
+                "01-01-2018",
+                Eval(
+                    new Call(
+                        new Get("format"),
+                        new Literal("{0}-{1}-{2}"),
+                        new List(
+                            new Literal("01"),
+                            new Literal("01"),
+                            new Literal("2018")
+                        )
+                    )
+                )
+            );
         }
 
         [Fact]

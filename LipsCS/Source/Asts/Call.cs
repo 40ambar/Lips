@@ -1,24 +1,40 @@
 ﻿using Source;
+using System;
 
 public class Call : Ast {
 
-    public readonly Lambda Function;
+    public readonly Ast Function; //eval yapınca c# fonksiyonu gelecek
     public readonly Ast[] ParametersValues;
 
-    public Call(Lambda function, params Ast[] parametersValues) {
+    public Call(Ast function, params Ast[] parametersValues) {
         Function = function;
         ParametersValues = parametersValues;
     }
 
+    //f = (set sqrt (x y) (* x y))
+    //f = (Math.sqrt(x y))
     public override object Eval(Context context) {
-        var funcContext = context.Extend();
+
+        //evaluated parameters
+        var evaluatedParameters = new object[ParametersValues.Length];
         for (var i = 0; i < ParametersValues.Length; i++) {
-            funcContext.Define(
-                Function.ParameterNames[i],
-                ParametersValues[i].Eval(context)
-            );
+            evaluatedParameters[i] = ParametersValues[i].Eval(context);
         }
-        return Function.Eval(funcContext);
+
+        //get function
+        var func = (Delegate)Function.Eval(context);
+
+        //internal
+        if (Function is Lambda) {
+            return func.DynamicInvoke(new[] { evaluatedParameters });
+        }
+
+        //external
+        else {
+            return func.DynamicInvoke(evaluatedParameters);
+        }
+
+
     }
 
 }

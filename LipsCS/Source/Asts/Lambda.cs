@@ -1,4 +1,5 @@
 ﻿using Source;
+using System;
 
 public class Lambda : Ast {
 
@@ -11,7 +12,16 @@ public class Lambda : Ast {
     }
 
     public override object Eval(Context context) {
-        return Body.Eval(context);
+        return new Func<object[], object>(arguments => {
+            var funcContext = context.Extend();
+            for (var i = 0; i < arguments.Length; i++) {
+                funcContext.Define(
+                    ParameterNames[i],
+                    arguments[i]
+                );
+            }
+            return Body.Eval(funcContext);
+        });
     }
 
 }
