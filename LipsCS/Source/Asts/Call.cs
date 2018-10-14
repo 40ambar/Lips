@@ -1,6 +1,7 @@
 ﻿using Source;
 using System;
 
+//(f args..)
 public class Call : Ast {
 
     public readonly Ast Function; //eval yapınca c# fonksiyonu gelecek
@@ -11,8 +12,6 @@ public class Call : Ast {
         ParametersValues = parametersValues;
     }
 
-    //f = (set sqrt (x y) (* x y))
-    //f = (Math.sqrt(x y))
     public override object Eval(Context context) {
 
         //evaluated parameters
@@ -33,7 +32,6 @@ public class Call : Ast {
         else {
             return func.DynamicInvoke(evaluatedParameters);
         }
-
 
     }
 

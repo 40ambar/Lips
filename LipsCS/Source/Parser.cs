@@ -8,9 +8,9 @@
             Lexer = new Lexer(source);
         }
 
-        //public Ast Read() {
-        //    return null;
-        //}
+        public Ast Read() {
+            return null;
+        }
 
     }
 
